@@ -1,0 +1,5 @@
+# Simplistic workflow 1
+
+1. User logs in through their facebook account.
+2. Searches for a podcast and rates that podcast.
+3. In the main page of the app, there is a timeline view of how your friends have rated podcasts.
