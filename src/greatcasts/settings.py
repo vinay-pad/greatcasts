@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook'
 ]
 
-SITE_ID = 1
+SITE_ID = 2
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -64,7 +64,7 @@ ROOT_URLCONF = 'greatcasts.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,6 +77,16 @@ TEMPLATES = [
     },
 ]
 
+# auth and allauth settings
+LOGIN_REDIRECT_URL = '/loggedin/'
+SOCIALACCOUNT_QUERY_EMAIL = True
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'SCOPE': ['email', 'public_profile', 'user_friends'],
+        'METHOD': 'oauth2'
+    }
+}
+
 WSGI_APPLICATION = 'greatcasts.wsgi.application'
 
 
@@ -86,7 +96,7 @@ WSGI_APPLICATION = 'greatcasts.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'greatcasts',
+        'NAME': 'greatcasts1',
         'USER': 'greatcastsuser', #XXX remove this and make it part of a startup script
         'PASSWORD': 'mobilefractals', #XXX remove this and make it part of a startup script 
         'HOST': 'localhost',
@@ -140,4 +150,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-AUTH_USER_MODEL  = 'users.User'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
